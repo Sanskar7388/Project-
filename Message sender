@@ -1,0 +1,75 @@
+from tkinter import *
+from tkinter import ttk
+import pyautogui
+from tkinter import messagebox
+import time
+import webbrowser as wb
+root = Tk()
+
+s=8
+def adder():
+    wb.open('https://docs.google.com/document/d/1pj9zRNfMYNL0HbhJjKMMstwbUIWKI-ev53_kaeZchso/edit?usp=sharing')
+    # global s
+    # s+=1
+    # print(s)
+    # Label(root,text="Write your message : " , font='Helvetica 15 bold').grid(row=s,column=1)
+    # Entry(root, bg="yellow", width=40, borderwidth=2).grid(row=s,column=2) 
+m=1
+def stop():
+    global m
+    m+=1
+def sender():
+    a=en.get()
+    q=a.split("ww")
+    b=en2.get()
+    c=en3.get() 
+
+    time.sleep(4)
+    i=0
+    z=int(b)
+    if a=="":
+        messagebox.showwarning("warnning","Please enter some message ")
+            
+        
+    while i < z: 
+              
+        p=int(c)
+        for w in q:
+            pyautogui.write(w)
+            time.sleep(p)
+            pyautogui.press("enter")
+        time.sleep(p)
+        i+=1
+def Help():
+    messagebox.showinfo("Help","To send multipal message not in one go type WW in between  the messages (for example: hi WW what are you doing WW I will reach there)")
+            
+# Help1=Menu(root)
+# m1=Menu(Help1,tearoff=0)
+# m1.add_command(label="sdishkdbfvklndf")   hi 
+
+
+# root.config(menu=Help1)     
+root.title("message sender ")
+root.geometry("665x333")
+root.minsize(700,272)
+root.maxsize(700,272)
+name= Label(root,text="Write your message : " , font='Helvetica 15 bold').grid(row=1,column=1)
+accurance=Label(root,text="No of times you want to send message : " , font='Helvetica 10 bold').grid(row=3,column=1)
+defference=Label(root,text="Time defference between two consicutive message  : " , font='Helvetica 8 bold').grid(row=5,column=1)
+en=Entry(root, bg="yellow", width=40, borderwidth=2)
+en.grid(row=1,column=2)
+en2=Entry(root, bg="yellow", width=40, borderwidth=2)
+en2.grid(row=3,column=2)
+en3=Entry(root, bg="yellow", width=40, borderwidth=2)
+en3.grid(row=5,column=2)
+label1=Label(root , text="#note : After clicking on Send button just", font='Helvetica 10')
+label1.grid(row=9, column=1)
+label1=Label(root , text="   click on the message box of your", font='Helvetica 10')
+label1.grid(row=10, column=1)
+label1=Label(root , text="   messaging aap", font='Helvetica 10')
+label1.grid(row=11, column=1)
+butten1=Button(root,text="Send",command=sender,padx=59).grid(row=6,column=2)
+butten2=Button(root,text="need tutorial",command=adder,padx=59).grid(row=8,column=1)
+butten3=Button(root,text="Help",command=Help,padx=59).grid(row=7,column=1)
+butten3=Button(root,text="stop", command=stop,padx=59).grid(row=7,column=2)
+root.mainloop()
