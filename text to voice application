@@ -1,0 +1,76 @@
+import os 
+import pygame
+import time
+# from playsound import playsound
+from gtts import gTTS
+from tkinter import *
+from tkinter import ttk
+from tkinter import filedialog
+pygame.init()
+root = Tk()
+root.title("Text to mp3")
+root.maxsize(500,200)
+root.minsize(500,200)
+q=1
+path=""
+def file1():
+    global path
+    path=filedialog.askopenfilename()
+    print(path)
+    a=path
+    o=f"{a}"
+    en.insert(0,o)
+    return path
+
+root.geometry("665x333")
+def submit():
+    if path=="":
+        a=en.get()
+    else :
+        a=path 
+    with open(rf"{a}","r+") as q:
+        w=q.read()
+    tts=gTTS(text=w,lang="en")
+    filename="voice.mp3"
+    tts.save(filename)
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play()
+    
+    # pygame.mixer.music.unload(filename)
+
+    # playsound(filename)
+def submit1():
+    pygame.mixer.music.pause()
+    
+def unpose():
+
+    pygame.mixer.music.unpause()
+def exit1():
+    root.destroy()
+
+# def check():
+#     print(v.get())
+
+
+
+
+# v=IntVar()
+# radio=Radiobutton(root,text="In male voice ",value=1,variable=v,command=check,).grid(row=10,column=2)
+# radio=Radiobutton(root,text="In female voice ",value=2,variable=v,command=check).grid(row=11,column=2)
+# print(v.get())
+
+lavel = Label(root,text="Text reader  ",font="Helvetica 16 bold")
+lavel.grid(row=0,column=3)
+# print(type(lavel))
+name= Label(root,text="Uplode the text file :",font='Helvetica 10 bold').grid(row=1,column=1)
+
+en=Entry(root, bg="white", width=20, borderwidth=2)
+en.grid(row=1,column=2)
+
+butten=Button(root,text="Submit",command=submit,padx=59).grid(row=6,column=2)
+butten2=Button(root,text="Pause",command=submit1,padx=63).grid(row=7,column=2)
+butten3=Button(root,text="Unpose",command=unpose,padx=59).grid(row=8,column=2)
+butten5=Button(root,text="Exit",command=exit1,padx=70).grid(row=9,column=2)
+butten6=Button(root,text="Browse",command=file1,padx=59).grid(row=1,column=3)
+
+root.mainloop()
