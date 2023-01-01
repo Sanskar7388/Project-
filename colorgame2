@@ -1,0 +1,152 @@
+from tkinter import *
+import random
+from tkinter import messagebox
+import sys
+
+root = Tk()
+root.title("A color game")
+root.geometry("600x400")
+root.maxsize(600, 400)
+root.minsize(600, 400)
+score = 0
+game_counter = 0
+colors1 = [0]
+gameloop = 0
+
+
+def scoreup1():
+    global score
+    if button4["text"] == str(colors[1]):
+        scoreLabel.config(text="score:" + str(score))
+        score += 1
+
+        scoreLabel.config(text="score:" + str(score))
+
+
+def scoreup2():
+    global score
+    if button2["text"] == str(colors[1]):
+        scoreLabel.config(text="score:" + str(score))
+        score += 1
+        scoreLabel.config(text="score:" + str(score))
+
+
+def scoreup3():
+    global score
+    if button3["text"] == str(colors[1]):
+        scoreLabel.config(text="score:" + str(score))
+        score += 1
+        scoreLabel.config(text="score:" + str(score))
+
+
+def scoreup():
+    global score
+    score += 1
+    if button4["text"] == str(colors[1]):
+        scoreLabel.config(text="score:" + str(score))
+
+
+button4 = Button(root, text="colur name", command=scoreup, font=(25))
+button1 = Button(root, text="colur name ", command=scoreup1, font=(25))
+button2 = Button(root, text="colur name ", command=scoreup2, font=(25))
+button3 = Button(root, text="colur name ", command=scoreup3, font=(25))
+
+colors = ["Red", "Blue", "Green", "Pink", "Black", "Yellow", "Orange", "white", "purple", "Brown", "cyan"]
+
+score = 0
+timeleft = 4
+
+
+def startGame(a):
+    global v
+    if timeleft == 4:
+        countdown()
+
+    nextcolor()
+
+
+def countdown():
+    global timeleft
+    global v
+    if timeleft == 0:
+        timeleft = 4
+
+        startGame(1)
+
+
+
+
+    #   messagebox.showinfo("Time Left", "Time is over and your score is"+str(score))
+    else:
+        timeleft -= 1
+        timeLabel.config(text="Time left :" + str(timeleft))
+        if gameloop >= 4 and gameloop <= 11:
+            timeLabel.after(620, countdown)
+        elif gameloop >= 12 and gameloop <= 20:
+            timeLabel.after(500, countdown)
+        else:
+
+            timeLabel.after(1000, countdown)
+
+
+def nextcolor():
+    global game_counter
+    global gameloop
+
+    global score
+    global timeleft
+    global button4
+    global button1
+    global button2
+    global button3
+    global s
+    global a
+    gameloop += 1
+    game_counter += 1
+    if game_counter == 20:
+        messagebox.showinfo("Game over ", "Time is over and your score is" + str(score))
+        root.destroy()
+
+    if timeleft > 0:
+        random.shuffle(colors)
+
+        label.config(fg=str(colors[1]), text=str(colors[0]))
+        v = str(colors[1])
+        a = [v, str(colors[2]), str(colors[3]), str(colors[5])]
+        random.shuffle(a)
+        button4["text"] = a[0]
+        button1["text"] = a[1]
+        button2["text"] = a[2]
+        button3["text"] = a[3]
+        del colors1[0]
+        colors1.append(a)
+
+
+instructions = Label(root, text="Click the button which have the same color as of text", font=("Helvetica", 13))
+instructions.grid(row=1, column=4)
+
+scoreLabel = Label(root, text="press Enter to start", font=("Helvetica", 11))
+scoreLabel.grid(row=2, column=4)
+
+timeLabel = Label(root, text="Time Left:" + str(timeleft), font=("Helvetica", 11))
+timeLabel.grid(row=3, column=4)
+
+label = Label(root, font=("helvetica", 36))
+label.grid(row=4, column=4)
+
+# can_widget=Canvas(root,width=375,height=200)
+# can_widget.pack()
+# can_widget.create_rectangle(0,0,150,90,fill="red")
+# # can_widget.create_rectangle(20,20,60,70,fill="green")
+# can_widget.create_text(50,50,text="sanskarsengar")
+
+
+pak = ["button4", "button1", "button2", "button3"]
+button4.grid(row=5, column=1)
+button1.grid(row=5, column=5)
+button2.grid(row=6, column=1)
+button3.grid(row=6, column=5)
+
+# button5=Button(root,text="colur name ").pack()
+root.bind('<Return>', startGame)
+root.mainloop()
